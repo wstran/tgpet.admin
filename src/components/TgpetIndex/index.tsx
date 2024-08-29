@@ -4,7 +4,7 @@ import UserAnalytics from "./components/UserAnalytics";
 import CardDataStats from "../CardDataStats";
 import UserTable from './components/UserTable'
 import { formatPriceNumber } from "@/libs/custom";
-import axiosApi from "@/libs/axiosApi";
+import useAxios from "@/hooks/useAxios";
 
 /* const MapOne = dynamic(() => import("@/components/Maps/MapOne"), {
   ssr: false,
@@ -45,12 +45,13 @@ type DataUser = {
 
 const ECommerce: React.FC = () => {
   const [dataUser, setDataUser] = React.useState<DataUser>();
+  const axiosApi = useAxios();
 
   useEffect(() => {
-    axiosApi.get("/api/users/get.users")
+    axiosApi?.get("/api/users/get.users")
       .then(({ data }) => setDataUser(data))
       .catch(console.error);
-  }, []);
+  }, [axiosApi]);
 
   return (
     dataUser && <>

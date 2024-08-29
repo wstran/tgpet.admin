@@ -1,9 +1,9 @@
 "use client";
 import { Metadata } from "next";
 import { Dispatch, SetStateAction, useEffect, useLayoutEffect, useMemo, useState } from "react";
-import axiosApi from "@/libs/axiosApi";
 import { message, Modal } from "antd";
 import { MessageInstance } from "antd/es/message/interface";
+import useAxios from "@/hooks/useAxios";
 
 export const metadata: Metadata = {
     title: "Next.js Form Layout | TgpetAdmin - Next.js Dashboard Template",
@@ -53,6 +53,8 @@ const configRewardTypes: { [key: string]: 'food' | 'token' } = {
 const questActions = ['like_post', 'retweet_post', 'reply_post', 'custom_id_1', 'custom_id_2', 'custom_id_3', 'custom_id_4'];
 
 const QuestPage = ({ quest_id, value, showModal, setComfirmModal, messageApi, setQuests }: { quest_id: string, value: QuestValue, showModal: (data: { title: string, description: JSX.Element | string, action: () => void } | false) => void, setComfirmModal: Dispatch<SetStateAction<boolean>>, messageApi: MessageInstance, setQuests: Dispatch<SetStateAction<Quests>> }) => {
+    const axiosApi = useAxios();
+
     const [quest, setQuest] = useState({ quest_id, value });
 
     const [isOptionSelected, setIsOptionSelected] = useState<boolean>(false);
@@ -70,7 +72,7 @@ const QuestPage = ({ quest_id, value, showModal, setComfirmModal, messageApi, se
                             action: () => {
                                 setComfirmModal(true);
 
-                                axiosApi.post('/api/settings/post.delete_quest', { quest_id, value: quest.value })
+                                axiosApi?.post('/api/settings/post.delete_quest', { quest_id, value: quest.value })
                                     .then(() => {
                                         messageApi.open({
                                             type: 'success',
@@ -513,7 +515,7 @@ const QuestPage = ({ quest_id, value, showModal, setComfirmModal, messageApi, se
                             action: () => {
                                 setComfirmModal(true);
 
-                                axiosApi.post('/api/settings/post.update_quest', { quest_id, quest_data: quest.value })
+                                axiosApi?.post('/api/settings/post.update_quest', { quest_id, quest_data: quest.value })
                                     .then(() => {
                                         messageApi.open({
                                             type: 'success',
@@ -900,12 +902,13 @@ const Index = () => {
     const [comfirmModal, setComfirmModal] = useState(false);
     const [dataModal, setDataModal] = useState<{ title: string, description: JSX.Element | string, action: (data: any) => void }>();
     const [newQuest, setNewQuest] = useState<{ quest_id: string, quest_data: QuestValue }>();
+    const axiosApi = useAxios();
 
     useLayoutEffect(() => {
-        axiosApi.get('/api/settings/get.quests')
+        axiosApi?.get('/api/settings/get.quests')
             .then(({ data }) => setQuests(data as Quests))
             .catch(console.error);
-    }, []);
+    }, [axiosApi]);
 
     const verifyQuestData = useMemo(() => (quest_data: QuestValue) => {
         if (typeof quest_data !== 'object' || !quest_data) {
@@ -1015,7 +1018,7 @@ const Index = () => {
         if (verifyQuestData(data.quest_data)) {
             setComfirmModal(true);
 
-            axiosApi.post('/api/settings/post.add_quest', data)
+            axiosApi?.post('/api/settings/post.add_quest', data)
                 .then(() => {
                     messageApi.open({
                         type: 'success',
