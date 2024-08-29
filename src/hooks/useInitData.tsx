@@ -12,7 +12,7 @@ const useTelegramInitData = () => {
             setInitData((window as any).Telegram.WebApp.initData);
         }
     }, []);
-
+    console.log('useTelegramInitData');
     return initData;
 };
 
