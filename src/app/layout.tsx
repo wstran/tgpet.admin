@@ -5,10 +5,6 @@ import "@/css/satoshi.css";
 import "@/css/style.css";
 import React, { useEffect, useState } from "react";
 import Loader from "@/components/common/Loader";
-import WebApp from "@twa-dev/sdk";
-
-WebApp.ready();
-WebApp.expand();
 
 export default function RootLayout({
   children,
