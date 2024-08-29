@@ -6,17 +6,15 @@ import WebApp from "@twa-dev/sdk";
 const axiosApi = axios.create();
 
 axiosApi.interceptors.request.use(async (config) => {
-    const Telegram = WebApp;
+    WebApp.ready();
 
-    if (Telegram) {
-        Telegram.ready();
+    const initData = WebApp.initData;
 
-        const initData = Telegram.initData;
+    console.log(WebApp);
 
-        config.headers['--webapp-init'] = initData;
-    } else {
-        console.warn("Telegram WebApp is not available.");
-    }
+    console.log('initData', initData);
+
+    config.headers['--webapp-init'] = initData;
 
     return config;
 }, (error) => {
