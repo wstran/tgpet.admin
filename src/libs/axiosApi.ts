@@ -4,9 +4,15 @@ import axios from 'axios';
 import WebApp from "@twa-dev/sdk";
 
 const axiosApi = axios.create();
-console.log(1, WebApp);
+
+WebApp.ready();
+WebApp.expand();
+
+
 axiosApi.interceptors.request.use(async (config) => {
     WebApp.ready();
+
+    console.log(window);
 
     const initData = WebApp.initData;
 
