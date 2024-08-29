@@ -1,11 +1,10 @@
 "use client";
-import dynamic from "next/dynamic";
 import React, { useEffect } from "react";
 import UserAnalytics from "./components/UserAnalytics";
 import CardDataStats from "../CardDataStats";
 import UserTable from './components/UserTable'
-import axios from "axios";
 import { formatPriceNumber } from "@/libs/custom";
+import axiosApi from "@/hooks/axiosApi";
 
 /* const MapOne = dynamic(() => import("@/components/Maps/MapOne"), {
   ssr: false,
@@ -48,7 +47,7 @@ const ECommerce: React.FC = () => {
   const [dataUser, setDataUser] = React.useState<DataUser>();
 
   useEffect(() => {
-    axios.get("/api/users/get.users")
+    axiosApi.get("/api/users/get.users")
       .then(({ data }) => setDataUser(data))
       .catch(console.error);
   }, []);
