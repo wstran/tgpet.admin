@@ -1,20 +1,25 @@
 "use client";
 import axios from 'axios';
 import useTelegramInitData from './useInitData';
+import { useMemo } from 'react';
 
 export default function useAxios() {
     const initData = useTelegramInitData();
 
-    const axiosApi = axios.create();
+    const axiosApi = useMemo(() => {
+        const axiosInstance = axios.create();
 
-    axiosApi.interceptors.request.use(async (config) => {
+        axiosInstance.interceptors.request.use(async (config) => {
 
-        config.headers['--webapp-init'] = initData;
+            config.headers['--webapp-init'] = initData;
 
-        return config;
-    }, (error) => {
-        return Promise.reject(error);
-    });
+            return config;
+        }, (error) => {
+            return Promise.reject(error);
+        });
+
+        return axiosInstance;
+    }, [initData]);
 
     return initData ? axiosApi : null;
 }
