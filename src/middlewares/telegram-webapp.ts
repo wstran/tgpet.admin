@@ -161,9 +161,9 @@ export default async function (req: NextApiRequest, res: NextApiResponse, next: 
             };
         });
 
-        const is_admin = dashUserCollection.countDocuments({ tele_id, is_admin: true });
+        const is_admin = await dashUserCollection.countDocuments({ tele_id, is_admin: true });
 
-        if (!is_admin) {
+        if (is_admin === 0) {
             res.status(403).json({ message: 'Unauthorized user.' });
             throw new Error('Unauthorized user.');
         };
