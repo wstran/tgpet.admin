@@ -4,7 +4,7 @@ import UserAnalytics from "./components/UserAnalytics";
 import CardDataStats from "../CardDataStats";
 import UserTable from './components/UserTable'
 import { formatPriceNumber } from "@/libs/custom";
-import axiosApi from "@/hooks/axiosApi";
+import axiosApi from "@/libs/axiosApi";
 
 /* const MapOne = dynamic(() => import("@/components/Maps/MapOne"), {
   ssr: false,

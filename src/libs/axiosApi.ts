@@ -10,14 +10,7 @@ axiosApi.interceptors.request.use(async (config) => {
 
         const initData = Telegram.WebApp.initData;
 
-        console.log("initData:", initData);
-
-        if (initData) {
-            config.headers['--webapp-init'] = initData;
-            console.log("Header '--webapp-init' added:", config.headers['--webapp-init']);
-        } else {
-            console.warn("initData is empty or undefined.");
-        }
+        config.headers['--webapp-init'] = initData;
     } else {
         console.warn("Telegram WebApp is not available.");
     }

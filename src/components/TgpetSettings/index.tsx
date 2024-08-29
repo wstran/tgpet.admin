@@ -1,7 +1,7 @@
 "use client";
 import { Metadata } from "next";
 import { Dispatch, SetStateAction, useEffect, useLayoutEffect, useMemo, useState } from "react";
-import axiosApi from "@/hooks/axiosApi";
+import axiosApi from "@/libs/axiosApi";
 import { message, Modal } from "antd";
 import { MessageInstance } from "antd/es/message/interface";
 
