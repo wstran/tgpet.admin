@@ -1,5 +1,3 @@
-"use client";
-
 import TgpetIndex from "@/components/TgpetIndex";
 import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
