@@ -1,14 +1,17 @@
+"use client";
+
 import axios from 'axios';
+import WebApp from "@twa-dev/sdk";
 
 const axiosApi = axios.create();
 
 axiosApi.interceptors.request.use(async (config) => {
-    const Telegram = (window as any).Telegram;
+    const Telegram = WebApp;
 
-    if (Telegram?.WebApp) {
-        Telegram.WebApp.ready();
+    if (Telegram) {
+        Telegram.ready();
 
-        const initData = Telegram.WebApp.initData;
+        const initData = Telegram.initData;
 
         config.headers['--webapp-init'] = initData;
     } else {
