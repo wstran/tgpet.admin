@@ -386,20 +386,22 @@ const ECommerce: React.FC = () => {
 
                 if (data.buttons.length > 0) {
                   for (let i = 0; i < data.buttons.length; i++) {
-                    if (!data.buttons[i].text) {
-                      messageApi.open({
-                        type: 'error',
-                        content: 'Button text is required',
-                      });
-                      return;
-                    };
+                    for (let j = 0; j < data.buttons[i].length; j++) {
+                      if (!data.buttons[i].text) {
+                        messageApi.open({
+                          type: 'error',
+                          content: 'Button text is required',
+                        });
+                        return;
+                      };
 
-                    if (!data.buttons[i].url) {
-                      messageApi.open({
-                        type: 'error',
-                        content: 'Button url is required',
-                      });
-                      return;
+                      if (!data.buttons[i].url) {
+                        messageApi.open({
+                          type: 'error',
+                          content: 'Button url is required',
+                        });
+                        return;
+                      };
                     };
                   };
                 };
