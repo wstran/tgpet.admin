@@ -21,7 +21,5 @@ export default function useAxios() {
         return axiosInstance;
     }, [initData]);
 
-    console.log('useAxios');
-
-    return initData ? axiosApi : null;
+    return (initData || process.env.NODE_ENV === 'development') ? axiosApi : null;
 }

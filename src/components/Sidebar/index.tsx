@@ -87,7 +87,10 @@ const menuGroups = [
         ),
         label: "Settings",
         route: "#",
-        children: [{ label: "Quests", route: "/tgpet_setting_quests" }],
+        children: [
+          { label: "Quests", route: "/tgpet_setting_quests" },
+          { label: "State", route: "/tgpet_setting_states" },
+        ],
       },
       /* {
         icon: (

@@ -1,8 +1,7 @@
 
 import CryptoJS from 'crypto-js';
 import Database from '../libs/database';
-import { RedisWrapper } from '../libs/redis-wrapper';
-import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequest, NextApiResponse } from "next";
 import geoip from 'geoip-lite';
 
 export interface User {
@@ -19,8 +18,6 @@ interface TeleUser extends User {
 export interface RequestWithUser extends NextApiRequest {
     tele_user: TeleUser;
 };
-
-const redisWrapper = new RedisWrapper(process.env.REDIS_URL || 'redis://127.0.0.1:6379');
 
 export default async function (req: NextApiRequest, res: NextApiResponse, next: (req: RequestWithUser, res: NextApiResponse) => void) {
     if (process.env.NODE_ENV === 'development') {
